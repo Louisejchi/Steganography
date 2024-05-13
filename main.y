@@ -11,6 +11,7 @@
 
 %token <strval> PROTO
 %token <strval> IP
+%token <strval> STRING
 
 %token SELECT
 %token FROM
@@ -26,6 +27,7 @@ expr: IP
     | expr FROM PROTO { }
     | expr INTO PROTO { }
     | expr INJECT PROTO { }
+    | expr STRING PROTO { }
     | expr WITH PROTO { }
     | expr ONTO IP { }
 
