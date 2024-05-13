@@ -9,7 +9,7 @@
 	char *strval;
 }
 
-%token <strval> RPOTO
+%token <strval> PROTO
 %token <strval> IP
 
 %token SELECT
@@ -19,4 +19,14 @@
 %token WITH
 %token ONTO
 
+%%
 
+expr: IP
+    | expr SELECT PROTO { }
+    | expr FROM PROTO { }
+    | expr INTO PROTO { }
+    | expr INJECT PROTO { }
+    | expr WITH PROTO { }
+    | expr ONTO IP { }
+
+%%
