@@ -9,7 +9,7 @@ test.exe: test.o grammer.o $(MODULES)
 	gcc -o $@ $^
 
 %.o: %.c
-	gcc -c $<
+	gcc -c $< -o $@
 
 main.exe: lex.yy.c main.tab.c $(MODULES)
 	$(CC) -o $@ $^ -lfl
