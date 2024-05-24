@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include "main.tab.h"
+#include "Module/utils.h"
 %}
 
 %%
@@ -19,18 +20,22 @@ USEKEY  { return USEKEY; }
 PROTO   { return PROTO; }
 WITH    { return WITH; }
 OUT     { return OUT; }
-IF	{ return IF; }
-DO	{ return DO; }
+IF	    { return IF; }
+DO	    { return DO; }
 ELSE	{ return ELSE; }
 
+  /* protocol */
+ip  { yylval.intval = ENUM_IP; return ENUM_PROTO; }
+udp { yylval.intval = ENUM_UDP; return ENUM_PROTO; }
+tcp { yylval.intval = ENUM_TCP; return ENUM_PROTO; }
 
- /* numbers */
+  /* numbers */
 [0-9]+  { yylval.intval = atoi(yytext); return NUMBER; }
 
- /* strings */
+  /* strings */
 [_.A-Z]+ { yylval.strval = strdup(yytext); return STRING; }
 
- /* skip whitespace */
+  /* skip whitespace */
 [ \t\n]   
 
 .       { return yytext[0]; } /* return any other character as itself */
