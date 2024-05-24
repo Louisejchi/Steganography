@@ -40,35 +40,49 @@ FILE *yyset_in(FILE *);
 %token DO
 %token ELSE
 
-
 %type <strval> outfile
-%%
 
-stmt_list: stmt ';'
-    | stmt_list stmt ';'
+%start stmt
+
+%%
+stmt:
+    | inject_stmt 
+    | select_stmt 
     ;
 
  /* inject */
-stmt:
-     | INJECT STRING
+inject_stmt: 
+       INJECT STRING
        ONTO STRING
        USEKEY STRING
-       // IF ENUM_PROTO '[' NUMBER ']'
-       // DO ENUM_PROTO '[' NUMBER ']' 
        IF ENUM_PROTO '[' NUMBER ']'
        DO ENUM_PROTO '[' NUMBER ']' 
        ELSE ENUM_PROTO '[' NUMBER ']'
-       outfile
+       outfile ';'
  	{ inject_file( $2, $22, $4, $6, $8, $10, $13, $15, $18, $20); } 
        ;
 
- /* else protocol[offset] */
+ 
+ /* default outfile */
+ outfile: OUT STRING { $$ = $2 ;}
+    | { $$ = "covert.pcap" ;}
 
- /* stega function name*/
- /* default out file */
- outfile: { $$ = "covert.pcap" ;} 
-    | OUT STRING { $$ = $2 ;}
     ;
+
+/* else protocol[offset] */
+
+
+/* select */
+select_stmt:
+       SELECT FROM STRING
+       INTO STRING
+       USEKEY STRING
+       IF ENUM_PROTO '[' NUMBER ']'
+       DO ENUM_PROTO '[' NUMBER ']' 
+       ELSE ENUM_PROTO '[' NUMBER ']'
+       ';'
+       { select_file( $3, $5, $7, $9, $11, $14, $16, $19, $21); } 
+       ;	
 
 %%
 
@@ -88,12 +102,13 @@ int main(){
     char* buffer = NULL;
     while( ( buffer = readline("> ")) ){
 	add_history(buffer);
-	strcat(buffer, "\n");
-	yyset_in(fmemopen(buffer, strlen(buffer), "r"));
+	// strcat(buffer, "\n");
+	// yyset_in(fmemopen(buffer, strlen(buffer), "r"));
 	yyparse();
         free(buffer);
-    }*/
-   yyparse();
+    }
+    */
+    yyparse();
   
    return 0;
 }
