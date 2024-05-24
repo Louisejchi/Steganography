@@ -12,7 +12,7 @@ test.exe: test.o $(MODULES)
 	gcc -c $< -o $@
 
 main.exe: lex.yy.c main.tab.c $(MODULES)
-	$(CC) -o $@ $^ -lfl
+	$(CC) -o $@ $^ -lfl -lreadline
 
 lex.yy.c: main.l main.tab.h main.tab.c
 	$(LEX) main.l
