@@ -16,7 +16,7 @@ int main(){
     /* Inject hidden information into bytestream field1 and field2 with selector. */
     inject("hidden", "key", fields_ptr);
     /* Write the new bytestream field1 and field2 into newfile. */
-    write("TEST2", fields_ptr);
+    write("TEST2", "TEST3", fields_ptr);
 
     /* Free the bytestreams. */
     clear_bytestream(fields_ptr);

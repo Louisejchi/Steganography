@@ -11,9 +11,9 @@ int read(char* infile, struct fields* fields){
     puts("========== return errorcode ==========");
 }
 
-int write(char* convert, struct fields* fields){
+int write(char* infile, char* outfile, struct fields* fields){
     puts("=============== write() ==============");
-    printf("Write to: %s\n", convert);
+    printf("Write to: %s\n", outfile);
     printf(" Selector(ignore)\n");
     printf("   Field1: %d[%d]\n", fields->field1.protocol, fields->field1.offset);
     printf("   Field2: %d[%d]\n", fields->field2.protocol, fields->field2.offset);
