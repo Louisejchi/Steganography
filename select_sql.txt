@@ -1,0 +1,1 @@
+SELECT FROM inputfile INTO outtxt USEKEY key IF IP[2] DO UDP[2] ELSE TCP[12];
