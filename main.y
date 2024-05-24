@@ -3,13 +3,18 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include "Module/utils.h"
+#include "grammer.h"
 
-void yyerror(char *s, ...);
+
+void yyerror(const char *s, ...);
+
+extern int yylineno;
 
 %}
 
 %union {
-	char *strval;
+    char *strval;
     int  intval;
 }
 
@@ -27,31 +32,46 @@ void yyerror(char *s, ...);
 %token WITH
 %token OUT
 %token EOL
+%token IF
+%token DO
+%token ELSE
 
 %%
 
-expr:
-    | expr SELECT PROTO { }
-    | expr FROM PROTO { }
-    | expr INTO PROTO { }
-    | expr INJECT PROTO { }
-    | expr STRING PROTO { }
-    | expr WITH PROTO { }
+stmt_list: stmt ';'
+    | stmt_list stmt ';'
+    ;
 
+ /* inject */
+stmt:
+     | INJECT STRING
+       ONTO STRING
+       USEKEY STRING
+       IF NUMBER '[' NUMBER ']'
+       DO NUMBER '[' NUMBER ']' 
+       ELSE NUMBER '[' NUMBER ']'
+       OUT STRING
+       { inject_file( $2, $23 , $4, $6, $8, $10, $13, $15, $18, $20); } 
+       ;
+
+ /* else protocol[offset] */
+
+ /* default out file */
+     
 %%
 
-/*void
-yyerror(char *s, ...){
-    extern yylineno;
-
+void yyerror(const char *s, ...){
     va_list ap;
     va_start(ap, s);
 
     fprintf(stderr, "%d: error: ", yylineno);
     vfprintf(stderr, s, ap);
     fprintf(stderr, "\n");
-}*/
+
+    va_end(ap);
+}
 
 int main(){
-    yyparse();
+    return yyparse();
+    
 }
