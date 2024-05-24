@@ -1,11 +1,11 @@
 CC = gcc
 LEX = flex
 YACC = bison
-MODULES = Module/utils.o Module/readwrite.o Module/steganography.o
+MODULES = grammer.o Module/utils.o Module/readwrite.o Module/steganography.o
 
 all: main.exe
 
-test.exe: test.o grammer.o $(MODULES)
+test.exe: test.o $(MODULES)
 	gcc -o $@ $^
 
 %.o: %.c
