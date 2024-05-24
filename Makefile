@@ -3,7 +3,7 @@ LEX = flex
 YACC = bison
 MODULES = Module/utils.o Module/readwrite.o Module/steganography.o
 
-all: main
+all: main.exe
 
 test.exe: test.o grammer.o $(MODULES)
 	gcc -o $@ $^
@@ -11,7 +11,7 @@ test.exe: test.o grammer.o $(MODULES)
 %.o: %.c
 	gcc -c $<
 
-main: lex.yy.c main.tab.c
+main.exe: lex.yy.c main.tab.c $(MODULES)
 	$(CC) -o $@ $^ -lfl
 
 lex.yy.c: main.l main.tab.h main.tab.c
@@ -21,6 +21,6 @@ main.tab.h main.tab.c: main.y
 	$(YACC) -d main.y
 
 clean:
-	rm -f main *.exe *.o lex.yy.c main.tab.c main.tab.h
+	rm -f *.exe *.o lex.yy.c main.tab.c main.tab.h
 	cd Module && make clean
 
