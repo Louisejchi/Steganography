@@ -10,11 +10,11 @@
 %%
 
  /* keyword */
-SELECT  { return SELECT; }
+SELECT  { yylval.intval = ENUM_SELECT; return SELECT; }
 FROM    { return FROM; }
 INTO    { return INTO; }
 
-INJECT  { return INJECT; }
+INJECT  { yylval.intval = ENUM_INJECT; return INJECT; }
 ONTO    { return ONTO; }
 USEKEY  { return USEKEY; }
 PROTO   { return PROTO; }
@@ -23,6 +23,8 @@ OUT     { return OUT; }
 IF	    { return IF; }
 DO	    { return DO; }
 ELSE	{ return ELSE; }
+
+HELP    { yylval.intval = ENUM_HELP; return HELP; }
 
   /* protocol */
 ip  { yylval.intval = ENUM_IP; return ENUM_PROTO; }
