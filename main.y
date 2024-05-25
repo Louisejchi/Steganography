@@ -43,7 +43,9 @@ FILE *yyset_in(FILE *);
 %type <strval> outfile
 
 %token HELP
+%token <intval> DEF
 %type <intval> help_option
+
 
 %start stmt
 
@@ -96,6 +98,8 @@ help_option: { $$ = 0; }
       | '*'  { $$ = 0; }
       | SELECT { $$ = $1; }
       | INJECT { $$ = $1; }
+      | DEF    { $$ = $1; }
+      ;
 
 
 %%

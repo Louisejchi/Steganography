@@ -46,12 +46,20 @@ void select_file(char* infile, char* outfile, char* keyfile,
 
 void help(int type){
 
-    if(!type){
-        /* Title */
-        puts("Compiler Term Project: Steganography");
-
+    /* Title */
+    puts("Compiler Term Project: Steganography");
+    
+   if(!type || type == ENUM_DEF){
+        /* Define Grammer */
+        puts("Definition");
+        puts("\tSELECT");
+        puts("\tINJECT");
+   }
+    if(!type || type == ENUM_SELECT || type == ENUM_INJECT){
         /* Grammer */
         puts("GRAMMAR");
+    }
+    if(!type || type == ENUM_INJECT){
         /* Steganography */
         puts("\tSteganography");
         printf("\t");
@@ -61,14 +69,14 @@ void help(int type){
              "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m "
              "OUT \e[4mout.pcap\e[0m;");
     }
-    if(!type){
+    if(!type || type == ENUM_INJECT){
         printf("\t");
     }
     if(!type || type == ENUM_INJECT){
         puts("  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
              "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
     }
-    if(!type){
+    if(!type || type == ENUM_SELECT){
         /* Extract */
         puts("\tExtract");
         printf("\t");

@@ -17,6 +17,7 @@ enum{
 
 enum {
     ENUM_HELP = 0,
+    ENUM_DEF,
     ENUM_SELECT,
     ENUM_INJECT
 };

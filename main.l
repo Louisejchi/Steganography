@@ -25,6 +25,7 @@ DO	    { return DO; }
 ELSE	{ return ELSE; }
 
 HELP    { yylval.intval = ENUM_HELP; return HELP; }
+DEF    { yylval.intval = ENUM_DEF; return DEF; }
 
   /* protocol */
 ip  { yylval.intval = ENUM_IP; return ENUM_PROTO; }
