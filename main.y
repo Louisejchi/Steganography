@@ -15,7 +15,6 @@ extern int yylineno;
 
 FILE *yyset_in(FILE *);
 
-char* yyin;
 %}
 
 %union {
@@ -100,14 +99,14 @@ void yyerror(const char *s, ...){
 }
 
 int main(int argc, char** argv){
-    
-    if( argc > 1){
-      // At the beginning, yyin = stdin
-      if(!(yyin = fopen(argv[1], "r"))) {
-        perror(argv[1]);
-        return (2);
-      }
-    }
+     
+    extern FILE *yyin;
+    if ( argc > 1 ){
+    	if( !(yyin = fopen(argv[1], "r")) ) {
+        	perror(argv[1]);
+        	exit(1);
+    	}
+    } 
     /*
     char* buffer = NULL;
     while( ( buffer = readline("> ")) ){
