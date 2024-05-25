@@ -38,8 +38,8 @@ tcp { yylval.intval = ENUM_TCP; return ENUM_PROTO; }
 [_.A-Z]+ { yylval.strval = strdup(yytext); return STRING; }
 
   /* skip whitespace */
-[ \t\n]   
-
+[ \t]   { }   
+\n      { return EOF; }
 .       { return yytext[0]; } /* return any other character as itself */
 
 %%
