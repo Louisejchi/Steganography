@@ -49,39 +49,39 @@ void help(int type){
     /* Title */
     puts("Compiler Term Project: Steganography");
     
-   if(!type || type == ENUM_DEF){
+    if(!type || type == ENUM_DEF){
         /* Define Grammer */
         puts("Definition");
         puts("\tSELECT");
         puts("\tINJECT");
-   }
-    if(!type || type == ENUM_SELECT || type == ENUM_INJECT){
+    }
+    if(!type || type == ENUM_SELECT || type == ENUM_INJECT || type == ENUM_GRAMMER ){
         /* Grammer */
         puts("GRAMMAR");
     }
-    if(!type || type == ENUM_INJECT){
+    if(!type || type == ENUM_INJECT || ENUM_GRAMMER ){
         /* Steganography */
         puts("\tSteganography");
         printf("\t");
     }
-    if(!type || type == ENUM_INJECT){
+    if(!type || type == ENUM_INJECT || ENUM_GRAMMER ){
         puts("  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
              "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m "
              "OUT \e[4mout.pcap\e[0m;");
     }
-    if(!type || type == ENUM_INJECT){
+    if(!type || type == ENUM_INJECT || ENUM_GRAMMER ){
         printf("\t");
     }
-    if(!type || type == ENUM_INJECT){
+    if(!type || type == ENUM_INJECT || ENUM_GRAMMER ){
         puts("  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
              "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
     }
-    if(!type || type == ENUM_SELECT){
+    if(!type || type == ENUM_SELECT || ENUM_GRAMMER ){
         /* Extract */
         puts("\tExtract");
         printf("\t");
     }
-    if(!type || type == ENUM_SELECT){
+    if(!type || type == ENUM_SELECT || ENUM_GRAMMER ){
         puts("  SELECT FROM \e[4mconvert.pcap\e[0m INTO \e[4mextract\e[0m USEKEY \e[4mkey\e[0m "
              "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
     }

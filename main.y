@@ -44,6 +44,7 @@ FILE *yyset_in(FILE *);
 
 %token HELP
 %token <intval> DEF
+%token <intval> GRAMMER
 %type <intval> help_option
 
 
@@ -99,6 +100,7 @@ help_option: { $$ = 0; }
       | SELECT { $$ = $1; }
       | INJECT { $$ = $1; }
       | DEF    { $$ = $1; }
+      | GRAMMER    { $$ = $1; }
       ;
 
 
