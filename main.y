@@ -41,11 +41,6 @@ FILE *yyset_in(FILE *);
 %token DO
 %token ELSE
 
-<<<<<<< HEAD
-%token HELP
-=======
-%token <intval> HELP
->>>>>>> refs/remotes/origin/main
 
 %type <strval> outfile
 
