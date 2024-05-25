@@ -44,54 +44,73 @@ void select_file(char* infile, char* outfile, char* keyfile,
 
 }
 
-void help(){
-    /* Title */
-    puts("Compiler Term Project: Steganography");
+void help(int type){
 
-    /* Grammer */
-    puts("GRAMMAR");
-    /* Steganography */
-    puts("\tSteganography");
-    puts("\t  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
-         "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m "
-         "OUT \e[4mout.pcap\e[0m;");
-    puts("\t  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
-         "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
-    /* Extract */
-    puts("\tExtract");
-    puts("\t  SELECT FROM \e[4mconvert.pcap\e[0m INTO \e[4mextract\e[0m USEKEY \e[4mkey\e[0m "
-         "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
+    if(!type){
+        /* Title */
+        puts("Compiler Term Project: Steganography");
 
-    puts("\t  ");
-    /* Argument */
-    puts("ARGUMENT");
-    /* in.pcap */
-    puts("\t\e[4min.pcap\e[0m");
-    puts("\t\tThe input PCAP file is used for hiding data.");
-    /* out.pcap */
-    puts("\t\e[4mout.pcap\e[0m");
-    puts("\t\tThe output PCAP file contains hidden data. The default filename is \e[3mconvert.pcap\e[0m.");
-    /* convert.pcap */
-    puts("\t\e[4mconvert.pcap\e[0m");
-    puts("\t\tThe input PCAP file may contain hidden data.");
-    /* message */
-    puts("\t\e[4mmessage\e[0m");
-    puts("\t\tThe file has the data you want to hide.");
-    /* key */
-    puts("\t\e[4mkey\e[0m");
-    puts("\t\tThe file has the key used to do hidden data.");
-    /* extract */
-    puts("\t\e[4mextract\e[0m");
-    puts("\t\tThe file has the extracted data from convert.pcap.");
-    /* proto[offset] */
-    puts("\t\e[4mproto\e[0m");
-    puts("\t\tThe protocol name, including \e[3mIP, UDP, TCP\e[0m");
-    puts("\t\e[4moffset\e[0m");
-    puts("\t\tThe offset of the \e[4mproto\e[0m header.");
-    puts("\t\e[4mproto1[offset1]\e[0m");
-    puts("\t\tThe byte is used to select the byte which is used to hide data.");
-    puts("\t\e[4mproto2[offset2]\e[0m");
-    puts("\t\e[4mproto3[offset3]\e[0m");
-    puts("\t\tThe byte is used to hide data.");
-    puts("");
+        /* Grammer */
+        puts("GRAMMAR");
+        /* Steganography */
+        puts("\tSteganography");
+        printf("\t");
+    }
+    if(!type || type == ENUM_INJECT){
+        puts("  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
+             "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m "
+             "OUT \e[4mout.pcap\e[0m;");
+    }
+    if(!type){
+        printf("\t");
+    }
+    if(!type || type == ENUM_INJECT){
+        puts("  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
+             "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
+    }
+    if(!type){
+        /* Extract */
+        puts("\tExtract");
+        printf("\t");
+    }
+    if(!type || type == ENUM_SELECT){
+        puts("  SELECT FROM \e[4mconvert.pcap\e[0m INTO \e[4mextract\e[0m USEKEY \e[4mkey\e[0m "
+             "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
+    }
+    if(!type){
+        puts("");
+        /* Argument */
+        puts("ARGUMENT");
+        /* in.pcap */
+        puts("\t\e[4min.pcap\e[0m");
+        puts("\t\tThe input PCAP file is used for hiding data.");
+        /* out.pcap */
+        puts("\t\e[4mout.pcap\e[0m");
+        puts("\t\tThe output PCAP file contains hidden data. The default filename is \e[3mconvert.pcap\e[0m.");
+        /* convert.pcap */
+        puts("\t\e[4mconvert.pcap\e[0m");
+        puts("\t\tThe input PCAP file may contain hidden data.");
+        /* message */
+        puts("\t\e[4mmessage\e[0m");
+        puts("\t\tThe file has the data you want to hide.");
+        /* key */
+        puts("\t\e[4mkey\e[0m");
+        puts("\t\tThe file has the key used to do hidden data.");
+        /* extract */
+        puts("\t\e[4mextract\e[0m");
+        puts("\t\tThe file has the extracted data from convert.pcap.");
+        /* proto */
+        puts("\t\e[4mproto\e[0m");
+        puts("\t\tThe protocol name, including \e[3mIP, UDP, TCP\e[0m");
+        /* offset */
+        puts("\t\e[4moffset\e[0m");
+        puts("\t\tThe offset of the \e[4mproto\e[0m header.");
+        /* proto[offset] */
+        puts("\t\e[4mproto1[offset1]\e[0m");
+        puts("\t\tThe byte is used to select the byte which is used to hide data.");
+        puts("\t\e[4mproto2[offset2]\e[0m");
+        puts("\t\e[4mproto3[offset3]\e[0m");
+        puts("\t\tThe byte is used to hide data.");
+    }
+        puts("");
 }
