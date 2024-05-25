@@ -26,11 +26,11 @@ FILE *yyset_in(FILE *);
 %token <intval> NUMBER
 %token <intval> ENUM_PROTO
 
-%token SELECT
+%token <intval> SELECT
 %token FROM
 %token INTO
 
-%token INJECT
+%token <intval> INJECT
 %token ONTO
 %token USEKEY
 %token PROTO
@@ -40,6 +40,8 @@ FILE *yyset_in(FILE *);
 %token IF
 %token DO
 %token ELSE
+
+%token <intval> HELP
 
 %type <strval> outfile
 
