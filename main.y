@@ -40,9 +40,10 @@ FILE *yyset_in(FILE *);
 %token IF
 %token DO
 %token ELSE
-
-
 %type <strval> outfile
+
+%token HELP
+%type <intval> help_option
 
 %start stmt
 
@@ -93,7 +94,8 @@ help_stmt:
       ;
 help_option: { $$ = 0; }
       | '*'  { $$ = 0; }
-      | STRING { $$ = $2; }
+      | SELECT { $$ = $1; }
+      | INJECT { $$ = $1; }
 
 
 %%
