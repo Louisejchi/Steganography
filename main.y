@@ -41,6 +41,8 @@ FILE *yyset_in(FILE *);
 %token DO
 %token ELSE
 
+%token HELP
+
 %type <strval> outfile
 
 %start stmt
@@ -49,6 +51,7 @@ FILE *yyset_in(FILE *);
 stmt:
     | inject_stmt 
     | select_stmt 
+    | help_stmt
     ;
 
  /* inject */
@@ -70,7 +73,7 @@ inject_stmt:
 
     ;
 
-/* else protocol[offset] */
+ /* else protocol[offset] */
 
 
 /* select */
@@ -84,6 +87,15 @@ select_stmt:
        ';'
        { select_file( $3, $5, $7, $9, $11, $14, $16, $19, $21); } 
        ;	
+
+ /* help */
+help_stmt:
+      HELP help_option ';' { help($2); }
+      ;
+help_option: { $$ = 0; }
+      | '*'  { $$ = 0; }
+      | STRING { $$ = $2; }
+
 
 %%
 
