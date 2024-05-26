@@ -1,1 +1,2 @@
-SELECT FROM inputfile INTO outtxt USEKEY key IF IP[2] DO UDP[2] ELSE TCP[12];
+INJECT in.pcap ONTO message USEKEY key IF IP[0] DO IP[3] ELSE UDP[5];
+
