@@ -5,6 +5,8 @@
 #include <stdarg.h>
 #include "main.tab.h"
 #include "Module/utils.h"
+
+void yyerror(char *s, ...);
 %}
 
 %%
@@ -15,7 +17,6 @@ FROM    { return FROM; }
 INTO    { return INTO; }
 
 INJECT  { yylval.intval = ENUM_INJECT; return INJECT; }
-ONTO    { return ONTO; }
 USEKEY  { return USEKEY; }
 PROTO   { return PROTO; }
 WITH    { return WITH; }
@@ -40,8 +41,7 @@ tcp { yylval.intval = ENUM_TCP; return ENUM_PROTO; }
 [_.A-Z]+ { yylval.strval = strdup(yytext); return STRING; }
 
   /* skip whitespace */
-[ \t]   { }   
-\n      { return EOF; }
+[ \t\n]   { }   
 .       { return yytext[0]; } /* return any other character as itself */
 
 %%

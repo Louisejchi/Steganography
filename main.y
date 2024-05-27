@@ -31,7 +31,6 @@ FILE *yyset_in(FILE *);
 %token INTO
 
 %token <intval> INJECT
-%token ONTO
 %token USEKEY
 %token PROTO
 %token WITH
@@ -60,13 +59,13 @@ stmt:
  /* inject */
 inject_stmt: 
        INJECT STRING
-       ONTO STRING
+       INTO STRING
        USEKEY STRING
        IF ENUM_PROTO '[' NUMBER ']'
        DO ENUM_PROTO '[' NUMBER ']' 
        ELSE ENUM_PROTO '[' NUMBER ']'
        outfile ';'
- 	{ inject_file( $2, $22, $4, $6, $8, $10, $13, $15, $18, $20); } 
+ 	{ inject_file( $4, $22, $2, $6, $8, $10, $13, $15, $18, $20); } 
        ;
 
  

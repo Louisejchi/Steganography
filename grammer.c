@@ -65,7 +65,7 @@ void help(int type){
         printf("\t");
     }
     if(!type || type == ENUM_INJECT || type == ENUM_GRAMMER ){
-        puts("  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
+        puts("  INJECT \e[4mmessage\e[0m INTO \e[4min.pcap\e[0m USEKEY \e[4mkey\e[0m "
              "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m "
              "OUT \e[4mout.pcap\e[0m;");
     }
@@ -73,7 +73,7 @@ void help(int type){
         printf("\t");
     }
     if(!type || type == ENUM_INJECT || type == ENUM_GRAMMER ){
-        puts("  INJECT \e[4min.pcap\e[0m ONTO \e[4mmessage\e[0m USEKEY \e[4mkey\e[0m "
+        puts("  INJECT \e[4mmessage\e[0m INTO \e[4min.pcap\e[0m USEKEY \e[4mkey\e[0m "
              "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
     }
     if(!type || type == ENUM_SELECT || type == ENUM_GRAMMER ){
@@ -82,7 +82,7 @@ void help(int type){
         printf("\t");
     }
     if(!type || type == ENUM_SELECT || type == ENUM_GRAMMER ){
-        puts("  SELECT FROM \e[4mconvert.pcap\e[0m INTO \e[4mextract\e[0m USEKEY \e[4mkey\e[0m "
+        puts("  SELECT FROM \e[4mcovert.pcap\e[0m INTO \e[4mextract\e[0m USEKEY \e[4mkey\e[0m "
              "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
     }
     if(!type){
@@ -94,9 +94,9 @@ void help(int type){
         puts("\t\tThe input PCAP file is used for hiding data.");
         /* out.pcap */
         puts("\t\e[4mout.pcap\e[0m");
-        puts("\t\tThe output PCAP file contains hidden data. The default filename is \e[3mconvert.pcap\e[0m.");
-        /* convert.pcap */
-        puts("\t\e[4mconvert.pcap\e[0m");
+        puts("\t\tThe output PCAP file contains hidden data. The default filename is \e[3mcovert.pcap\e[0m.");
+        /* covert.pcap */
+        puts("\t\e[4mcovert.pcap\e[0m");
         puts("\t\tThe input PCAP file may contain hidden data.");
         /* message */
         puts("\t\e[4mmessage\e[0m");
@@ -106,7 +106,7 @@ void help(int type){
         puts("\t\tThe file has the key used to do hidden data.");
         /* extract */
         puts("\t\e[4mextract\e[0m");
-        puts("\t\tThe file has the extracted data from convert.pcap.");
+        puts("\t\tThe file has the extracted data from covert.pcap.");
         /* proto */
         puts("\t\e[4mproto\e[0m");
         puts("\t\tThe protocol name, including \e[3mIP, UDP, TCP\e[0m");
