@@ -1,2 +1,2 @@
-INJECT in.pcap ONTO message USEKEY key IF IP[0] DO IP[3] ELSE UDP[5];
+INJECT message INTO in.pcap USEKEY key IF IP[0] DO IP[3] ELSE UDP[5];
 

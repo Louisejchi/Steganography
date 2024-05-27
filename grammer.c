@@ -45,10 +45,10 @@ void select_file(char* infile, char* outfile, char* keyfile,
 }
 
 void help(int type){
-
-    /* Title */
-    puts("Compiler Term Project: Steganography");
-    
+    if(!type){
+        /* Title */
+        puts("Compiler Term Project: Steganography");
+    }
     if(!type || type == ENUM_DEF){
         /* Define Grammer */
         puts("DEFINITION");
