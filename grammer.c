@@ -34,11 +34,45 @@ void select_file(char* infile, char* outfile, char* keyfile,
     /* Get the bytestream. */
     read_pcap(infile, protocal, start, size, &data, &data_size);
 
-    /* Get the  hidden message from the bytestream. */
+    /* Get the hidden message from the bytestream. */
     select(infile, outfile, keyfile, protocal, start, size, data, data_size);
 
     /* Free the bytestreams. */
     free(data);
+
+}
+
+void chi_square_analysis_of_file(char* infile, int protocal, int start, int size){
+
+    /* Declare Variables*/
+    char *data;
+    int data_size;
+
+    /* Get the bytestream. */
+    read_pcap(infile, protocal, start, size, &data, &data_size);
+
+    /* Analysis */
+    double result = chi_square_analysis(data, size, data_size / start);
+    
+    /* Output */
+    printf("%f\n", result);
+
+}
+
+void rescaled_range_analysis_of_file(char* infile, int protocal, int start, int size){
+
+    /* Declare Variables*/
+    char *data;
+    int data_size;
+
+    /* Get the bytestream. */
+    read_pcap(infile, protocal, start, size, &data, &data_size);
+
+    /* Analysis */
+    double result = chi_square_analysis(data, size, data_size / start);
+    
+    /* Output */
+    printf("%f\n", result);
 
 }
 
