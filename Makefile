@@ -1,7 +1,7 @@
 CC = gcc
 LEX = flex
 YACC = bison
-MODULES = grammer.o Module/utils.o Module/readwrite.o Module/steganography.o
+MODULES = grammer.o Module/utils.o Module/readwrite.o Module/steganography.o Module/analysis.o
 
 all: main.exe
 

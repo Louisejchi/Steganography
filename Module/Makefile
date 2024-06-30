@@ -1,4 +1,4 @@
-test.exe: test.o readwrite.o steganography.o utils.o
+test.exe: test.o readwrite.o steganography.o analysis.o utils.o
 	gcc -o $@ $^
 
 %.o: %.c %.h utils.h

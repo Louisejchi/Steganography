@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <malloc.h>
 #include "Module/utils.h"
 #include "Module/readwrite.h"
 #include "Module/steganography.h"
