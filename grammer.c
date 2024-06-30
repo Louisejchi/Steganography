@@ -4,43 +4,41 @@
 #include "Module/steganography.h"
 
 void inject_file(char* infile, char* outfile, char* hiddenfile, char* keyfile,
-                 int proto0, int offset0, int proto1, int offset1, int proto2, int offset2){
+                 int protocal, int start, int size){
 
-    struct fields fields;
-    struct fields* fields_ptr = &fields;
+    /* Declare Variables*/
+    char *data;
+    int data_size;
 
-    /* Config the information of selector, field1 and field2. */
-    set_fields(fields_ptr, proto0, offset0, proto1, offset1, proto2, offset2);
-    /* Get the bytestreams of selector, field1 and field2 from the infile. */
-    read(infile, fields_ptr);
+    /* Get the bytestream. */
+    read_pcap(infile, protocal, start, size, &data, &data_size);
 
-    /* Inject hidden message into bytestreams of field1 and field2 with selector. */
-    inject(hiddenfile, keyfile, fields_ptr);
-    /* Write the new bytestreams field1 and field2 into outfile. */
-    write(infile, outfile, fields_ptr);
+    /* Inject hidden message into the bytestream. */
+    inject(hiddenfile, keyfile, protocal, start, size, &data, data_size);
 
-    /* Free the bytestreams. */
-    clear_bytestream(fields_ptr);
+    /* Write the bytestream. */
+    write_pcap(infile, outfile, protocal, start, size, data, data_size);
+
+    /* Free the bytestream. */
+    free(data);
 
 }
 
 void select_file(char* infile, char* outfile, char* keyfile,
-                 int proto0, int offset0, int proto1, int offset1, int proto2, int offset2){
+                 int protocal, int start, int size){
 
-    struct fields fields;
-    struct fields* fields_ptr = &fields;
+    /* Declare Variables*/
+    char *data;
+    int data_size;
 
-    /* Config the information of selector, field1 and field2. */
-    set_fields(fields_ptr, proto0, offset0, proto1, offset1, proto2, offset2);
-    /* Get the bytestreams of selector, field1 and field2 from the infile. */
-    read(infile, fields_ptr);
+    /* Get the bytestream. */
+    read_pcap(infile, protocal, start, size, &data, &data_size);
 
-    /* Get the  hidden message from bytestreams of field1 and field2 with selector
-     * and write into . */
-    select(infile, outfile, keyfile, fields_ptr);
+    /* Get the  hidden message from the bytestream. */
+    select(infile, outfile, keyfile, protocal, start, size, data, data_size);
 
     /* Free the bytestreams. */
-    clear_bytestream(fields_ptr);
+    free(data);
 
 }
 
