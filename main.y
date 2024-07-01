@@ -33,13 +33,13 @@ FILE *yyset_in(FILE *);
 %token <intval> INJECT
 %token USEKEY
 %token PROTO
-%token WITH
 %token OUT
 %token EOL
-%token IF
-%token DO
-%token ELSE
 %type <strval> outfile
+
+%token <intval> ANALYSIS_CS
+%token <intval> ANALYSIS_RS
+%token OF
 
 %token HELP
 %token <intval> DEF
@@ -52,7 +52,9 @@ FILE *yyset_in(FILE *);
 %%
 stmt:
     | inject_stmt 
-    | select_stmt 
+    | select_stmt
+    | analysis_cs_stmt
+    | analysis_rs_stmt
     | help_stmt
     ;
 
@@ -61,11 +63,9 @@ inject_stmt:
        INJECT STRING
        INTO STRING
        USEKEY STRING
-       IF ENUM_PROTO '[' NUMBER ']'
-       DO ENUM_PROTO '[' NUMBER ']' 
-       ELSE ENUM_PROTO '[' NUMBER ']'
+       PROTO ENUM_PROTO '[' NUMBER ':' NUMBER ']'
        outfile ';'
- 	{ inject_file( $4, $22, $2, $6, $8, $10, $13, $15, $18, $20); } 
+ 	{ inject_file( $4, $14, $2, $6, $8, $10, $12); } 
        ;
 
  
@@ -75,21 +75,34 @@ inject_stmt:
 
     ;
 
- /* else protocol[offset] */
-
-
 /* select */
 select_stmt:
        SELECT FROM STRING
        INTO STRING
        USEKEY STRING
-       IF ENUM_PROTO '[' NUMBER ']'
-       DO ENUM_PROTO '[' NUMBER ']' 
-       ELSE ENUM_PROTO '[' NUMBER ']'
+       PROTO ENUM_PROTO '[' NUMBER ':' NUMBER ']'
        ';'
-       { select_file( $3, $5, $7, $9, $11, $14, $16, $19, $21); } 
+       { select_file( $3, $5, $7, $9, $11, $13); } 
        ;	
 
+/* ANALYSIS CS */
+analysis_cs_stmt:
+       ANALYSIS_CS
+       OF STRING
+       PROTO ENUM_PROTO '[' NUMBER ':' NUMBER ']'
+       ';'
+       { chi_square_analysis_of_file($3, $5, $7, $9);}
+       ;
+
+/* ANALYSIS RS */
+analysis_rs_stmt:
+       ANALYSIS_RS
+       OF STRING
+       PROTO ENUM_PROTO '[' NUMBER ':' NUMBER ']'
+       ';'
+       { rescaled_range_analysis_of_file($3, $5, $7, $9);}
+       ;
+    
  /* help */
 help_stmt:
       HELP help_option ';' { help($2); }

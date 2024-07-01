@@ -20,7 +20,9 @@ enum {
     ENUM_DEF,
     ENUM_GRAMMER,
     ENUM_SELECT,
-    ENUM_INJECT
+    ENUM_INJECT,
+    ENUM_ANALYSIS_CS,
+    ENUM_ANALYSIS_RS
 };
 
 int set_fields(struct fields* fields, int p0, int o0, int p1, int o1, int p2, int o2);

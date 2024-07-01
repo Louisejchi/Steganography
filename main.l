@@ -19,11 +19,11 @@ INTO    { return INTO; }
 INJECT  { yylval.intval = ENUM_INJECT; return INJECT; }
 USEKEY  { return USEKEY; }
 PROTO   { return PROTO; }
-WITH    { return WITH; }
 OUT     { return OUT; }
-IF	    { return IF; }
-DO	    { return DO; }
-ELSE	{ return ELSE; }
+
+ANALYSIS_CS { yylval.intval = ENUM_ANALYSIS_CS; return ANALYSIS_CS; }
+ANALYSIS_RS { yylval.intval = ENUM_ANALYSIS_RS; return ANALYSIS_RS; }
+OF { return OF; }
 
 HELP    { yylval.intval = ENUM_HELP; return HELP; }
 DEF    { yylval.intval = ENUM_DEF; return DEF; }

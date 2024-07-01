@@ -13,7 +13,7 @@ void inject_file(char* infile, char* outfile, char* hiddenfile, char* keyfile,
 
     /* Get the bytestream. */
     read_pcap(infile, protocal, start, size, &data, &data_size);
-
+    
     /* Inject hidden message into the bytestream. */
     inject(hiddenfile, keyfile, protocal, start, size, &data, data_size);
 
@@ -105,7 +105,7 @@ void help(int type){
     }
     if(!type || type == ENUM_INJECT || type == ENUM_GRAMMER ){
         puts("  INJECT \e[4mmessage\e[0m INTO \e[4min.pcap\e[0m USEKEY \e[4mkey\e[0m "
-             "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m "
+             "PROTO \e[4mproto[start:size]\e[0m "
              "OUT \e[4mout.pcap\e[0m;");
     }
     if(!type || type == ENUM_INJECT || type == ENUM_GRAMMER ){
@@ -113,7 +113,7 @@ void help(int type){
     }
     if(!type || type == ENUM_INJECT || type == ENUM_GRAMMER ){
         puts("  INJECT \e[4mmessage\e[0m INTO \e[4min.pcap\e[0m USEKEY \e[4mkey\e[0m "
-             "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
+             "PROTO \e[4mproto[start:size]\e[0m;");
     }
     if(!type || type == ENUM_SELECT || type == ENUM_GRAMMER ){
         /* Extract */
@@ -122,8 +122,27 @@ void help(int type){
     }
     if(!type || type == ENUM_SELECT || type == ENUM_GRAMMER ){
         puts("  SELECT FROM \e[4mcovert.pcap\e[0m INTO \e[4mextract\e[0m USEKEY \e[4mkey\e[0m "
-             "IF \e[4mproto1[offset1]\e[0m DO \e[4mproto2[offset2]\e[0m ELSE \e[4mproto3[offset3]\e[0m;");
+             "PROTO \e[4mproto[start:size]\e[0m;");
     }
+    if(!type || type == ENUM_ANALYSIS_CS || type == ENUM_GRAMMER ){
+        /* CS Analysis */
+        puts("\tCS Analysis");
+        printf("\t");
+    }
+    if(!type || type == ENUM_ANALYSIS_CS || type == ENUM_GRAMMER ){
+        puts("  ANALYSIS_CS OF \e[4manalysis.pcap\e[0m PROTO \e[4mproto[start:size]\e[0m;");
+    }
+  
+    if(!type || type == ENUM_ANALYSIS_RS || type == ENUM_GRAMMER ){
+        /* RS Analysis */
+        puts("\tRS Analysis");
+        printf("\t");
+    }
+    if(!type || type == ENUM_ANALYSIS_RS || type == ENUM_GRAMMER ){
+        puts("  ANALYSIS_RS OF \e[4manalysis.pcap\e[0m PROTO \e[4mproto[start:size]\e[0m;");
+    }
+
+
     if(!type){
         puts("");
         /* Argument */
@@ -137,6 +156,9 @@ void help(int type){
         /* covert.pcap */
         puts("\t\e[4mcovert.pcap\e[0m");
         puts("\t\tThe input PCAP file may contain hidden data.");
+        /* analysis.pcap */
+        puts("\t\e[4manalysis.pcap\e[0m");
+        puts("\t\tThe input PCAP file is used for analysis.");
         /* message */
         puts("\t\e[4mmessage\e[0m");
         puts("\t\tThe file has the data you want to hide.");
@@ -148,16 +170,13 @@ void help(int type){
         puts("\t\tThe file has the extracted data from covert.pcap.");
         /* proto */
         puts("\t\e[4mproto\e[0m");
-        puts("\t\tThe protocol name, including \e[3mIP, UDP, TCP\e[0m");
-        /* offset */
-        puts("\t\e[4moffset\e[0m");
-        puts("\t\tThe offset of the \e[4mproto\e[0m header.");
-        /* proto[offset] */
-        puts("\t\e[4mproto1[offset1]\e[0m");
-        puts("\t\tThe byte is used to select the byte which is used to hide data.");
-        puts("\t\e[4mproto2[offset2]\e[0m");
-        puts("\t\e[4mproto3[offset3]\e[0m");
-        puts("\t\tThe byte is used to hide data.");
+        puts("\t\tThe protocol name, including \e[3mIP, UDP, TCP\e[0m.");
+        /* start */
+        puts("\t\e[4mstart\e[0m");
+        puts("\t\tThe starting byte of the \e[4mproto\e[0m header.");
+        /* size */
+        puts("\t\e[4msize\e[0m");
+        puts("\t\tThe number of bytes of the \e[4mproto\e[0m header.");
     }
         puts("");
 }
