@@ -8,8 +8,8 @@ void inject_file(char* infile, char* outfile, char* hiddenfile, char* keyfile,
                  int protocal, int start, int size){
 
     /* Declare Variables*/
-    char *data;
-    int data_size;
+    char *data = NULL;
+    int data_size = 0;
 
     /* Get the bytestream. */
     read_pcap(infile, protocal, start, size, &data, &data_size);
@@ -29,8 +29,8 @@ void select_file(char* infile, char* outfile, char* keyfile,
                  int protocal, int start, int size){
 
     /* Declare Variables*/
-    char *data;
-    int data_size;
+    char *data = NULL;
+    int data_size = 0;
 
     /* Get the bytestream. */
     read_pcap(infile, protocal, start, size, &data, &data_size);
@@ -46,8 +46,8 @@ void select_file(char* infile, char* outfile, char* keyfile,
 void chi_square_analysis_of_file(char* infile, int protocal, int start, int size){
 
     /* Declare Variables*/
-    char *data;
-    int data_size;
+    char *data = NULL;
+    int data_size = 0;
 
     /* Get the bytestream. */
     read_pcap(infile, protocal, start, size, &data, &data_size);
@@ -57,14 +57,17 @@ void chi_square_analysis_of_file(char* infile, int protocal, int start, int size
     
     /* Output */
     printf("%f\n", result);
+
+    /* Free the bytestreams. */
+    free(data);
 
 }
 
 void rescaled_range_analysis_of_file(char* infile, int protocal, int start, int size){
 
     /* Declare Variables*/
-    char *data;
-    int data_size;
+    char *data = NULL;
+    int data_size = 0;
 
     /* Get the bytestream. */
     read_pcap(infile, protocal, start, size, &data, &data_size);
@@ -74,6 +77,9 @@ void rescaled_range_analysis_of_file(char* infile, int protocal, int start, int 
     
     /* Output */
     printf("%f\n", result);
+
+    /* Free the bytestreams. */
+    free(data);
 
 }
 
