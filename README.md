@@ -11,3 +11,46 @@
 - `make`
 - `make test.exe` 生成 `test.c` 的執行檔 (`test.exe`)，用於測試。
 - `make clean` 刪除 `make` 生成的檔案。
+
+## GRAMMAR
+### Steganography
+- `INJECT message INTO in.pcap USEKEY key PROTO proto[start:size] OUT out.pcap;`
+- `INJECT message INTO in.pcap USEKEY key PROTO proto[start:size];`
+### Extract
+- `SELECT FROM covert.pcap INTO extract USEKEY key PROTO proto[start:size];`
+### CS Analysis
+- `ANALYSIS_CS OF analysis.pcap PROTO proto[start:size];`
+### RS Analysis
+- `ANALYSIS_RS OF analysis.pcap PROTO proto[start:size];`
+
+## ARGUMENT
+- `in.pcap`
+    -  The input PCAP file is used for hiding data.
+- `out.pcap`  
+    - The output PCAP file contains hidden data. The default filename is covert.pcap.
+- covert.pcap
+    - The input PCAP file may contain hidden data.
+- `analysis.pcap`
+    - The input PCAP file is used for analysis.
+- `message`
+    - The file has the data you want to hide.
+- `key`
+    - The file has the key used to do hidden data.
+- `extract`
+    - The file has the extracted data from covert.pcap.
+- `proto`
+    - The protocol name, including IP, UDP, TCP.
+- `start`
+    - The starting byte of the proto header.
+- `size`
+    - The number of bytes of the proto header.
+
+## EXAMPLE
+- Extract:
+    - `SELECT FROM covert.pcap INTO extract USEKEY key PROTO IP[7:3];`
+- Inject:
+    - `INJECT message INTO in.pcap USEKEY key PROTO UDP[7:3] OUT out.pcap;`
+- Chi Square Analysis:
+    - `ANALYSIS_CS OF analysis.pcap PROTO IP[7:1];`
+- RS Analysis:
+    - `ANALYSIS_RS OF analysis.pcap PROTO IP[7:3];`
