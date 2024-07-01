@@ -94,6 +94,8 @@ void help(int type){
         puts("DEFINITION");
         puts("\tSELECT");
         puts("\tINJECT");
+        puts("\tAnalysis_CS");
+        puts("\tAnalysis_RS");
     }
     if(!type || type == ENUM_SELECT || type == ENUM_INJECT || type == ENUM_GRAMMER ){
         /* Grammer */
