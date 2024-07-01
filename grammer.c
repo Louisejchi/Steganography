@@ -3,22 +3,23 @@
 #include "Module/utils.h"
 #include "Module/readwrite.h"
 #include "Module/steganography.h"
+#include "Module/analysis.h"
 
 void inject_file(char* infile, char* outfile, char* hiddenfile, char* keyfile,
-                 int protocal, int start, int size){
+                 int protocol, int start, int size){
 
     /* Declare Variables*/
     char *data = NULL;
     int data_size = 0;
 
     /* Get the bytestream. */
-    read_pcap(infile, protocal, start, size, &data, &data_size);
+    read_pcap(infile, protocol, start, size, &data, &data_size);
     
     /* Inject hidden message into the bytestream. */
-    inject(hiddenfile, keyfile, protocal, start, size, &data, data_size);
+    inject(hiddenfile, keyfile, protocol, start, size, &data, data_size);
 
     /* Write the bytestream. */
-    write_pcap(infile, outfile, protocal, start, size, data, data_size);
+    write_pcap(infile, outfile, protocol, start, size, data, data_size);
 
     /* Free the bytestream. */
     free(data);
@@ -26,31 +27,31 @@ void inject_file(char* infile, char* outfile, char* hiddenfile, char* keyfile,
 }
 
 void select_file(char* infile, char* outfile, char* keyfile,
-                 int protocal, int start, int size){
+                 int protocol, int start, int size){
 
     /* Declare Variables*/
     char *data = NULL;
     int data_size = 0;
 
     /* Get the bytestream. */
-    read_pcap(infile, protocal, start, size, &data, &data_size);
+    read_pcap(infile, protocol, start, size, &data, &data_size);
 
     /* Get the hidden message from the bytestream. */
-    select(infile, outfile, keyfile, protocal, start, size, data, data_size);
+    select(infile, outfile, keyfile, protocol, start, size, data, data_size);
 
     /* Free the bytestreams. */
     free(data);
 
 }
 
-void chi_square_analysis_of_file(char* infile, int protocal, int start, int size){
+void chi_square_analysis_of_file(char* infile, int protocol, int start, int size){
 
     /* Declare Variables*/
     char *data = NULL;
     int data_size = 0;
 
     /* Get the bytestream. */
-    read_pcap(infile, protocal, start, size, &data, &data_size);
+    read_pcap(infile, protocol, start, size, &data, &data_size);
 
     /* Analysis */
     double result = chi_square_analysis(data, size, data_size / start);
@@ -63,14 +64,14 @@ void chi_square_analysis_of_file(char* infile, int protocal, int start, int size
 
 }
 
-void rescaled_range_analysis_of_file(char* infile, int protocal, int start, int size){
+void rescaled_range_analysis_of_file(char* infile, int protocol, int start, int size){
 
     /* Declare Variables*/
     char *data = NULL;
     int data_size = 0;
 
     /* Get the bytestream. */
-    read_pcap(infile, protocal, start, size, &data, &data_size);
+    read_pcap(infile, protocol, start, size, &data, &data_size);
 
     /* Analysis */
     double result = chi_square_analysis(data, size, data_size / start);
